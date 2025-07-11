@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'provider/user_preferences_provider.dart';
 import 'pages/home_page.dart';
-import 'utils/theme_manager.dart';
+import 'pages/onboarding_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,21 +12,24 @@ void main() async {
   runApp(
     ChangeNotifierProvider(
       create: (_) => prefs,
-      child: const MyApp(),
+      child: MyApp(prefs: prefs),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final UserPreferencesProvider prefs;
+
+  const MyApp({super.key, required this.prefs});
 
   @override
   Widget build(BuildContext context) {
-    final prefs = Provider.of<UserPreferencesProvider>(context);
     return MaterialApp(
       title: 'PotterDB App',
-      theme: getThemeByHouse(prefs.house),
-      home: const MyHomePage(title: 'Inicio'),
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: prefs.showTutorial
+          ? const OnboardingPage()
+          : const MyHomePage(title: 'Inicio'),
     );
   }
 }
