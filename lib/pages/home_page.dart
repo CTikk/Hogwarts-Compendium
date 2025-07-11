@@ -135,6 +135,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColorLight,
         title: Text(widget.title),
         actions: [
           IconButton(
@@ -157,6 +158,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           ),
         ],
         bottom: TabBar(
+          labelColor: Theme.of(context).primaryColorDark,
+          indicatorColor: Theme.of(context).primaryColor,
+          dividerColor: Theme.of(context).shadowColor,
           controller: _tabController,
           tabs: const [
             Tab(text: 'Personajes'),

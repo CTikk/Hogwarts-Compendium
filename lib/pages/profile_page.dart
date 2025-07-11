@@ -31,16 +31,60 @@ class ProfilePage extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                    "Miembro de ${prefs.house}",
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  IconButton(
-                  icon: const Icon(Icons.edit),
-                  onPressed: () {
-                  },
-                ),
+                      "Miembro de ${prefs.house}",
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.edit),
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            String selectedHouse = prefs.house;
+                            return AlertDialog(
+                              title: const Text("Selecciona tu casa"),
+                              content: DropdownButton<String>(
+                                isExpanded: true,
+                                value: selectedHouse,
+                                onChanged: (String? value) {
+                                  if (value != null) {
+                                    selectedHouse = value;
+                                    // setState no disponible aquí → se guarda al presionar "Guardar"
+                                  }
+                                },
+                                items: [
+                                  'Gryffindor',
+                                  'Slytherin',
+                                  'Ravenclaw',
+                                  'Hufflepuff'
+                                ].map((house) {
+                                  return DropdownMenuItem(
+                                    value: house,
+                                    child: Text(house),
+                                  );
+                                }).toList(),
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: const Text("Cancelar"),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () async {
+                                    await prefs.updateHouse(selectedHouse);
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text("Guardar"),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ],
                 ),
                 const SizedBox(height: 20),
