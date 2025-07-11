@@ -4,6 +4,7 @@ class Spell {
   final String incantation;
   final String effect;
   final String type;
+  final String imageURL;
 
   Spell({
     required this.id,
@@ -11,6 +12,7 @@ class Spell {
     required this.incantation,
     required this.effect,
     required this.type,
+    required this.imageURL,
   });
 
   factory Spell.fromJson(Map<String, dynamic> json) {
@@ -21,6 +23,7 @@ class Spell {
       incantation: attr['incantation'] ?? '',
       effect: attr['effect'] ?? '',
       type: attr['type'] ?? '',
+      imageURL: attr['image'] ?? '',
     );
   }
 }

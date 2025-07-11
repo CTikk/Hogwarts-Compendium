@@ -22,6 +22,7 @@ class CharacterCard extends StatelessWidget {
               builder: (_) => DetailPage(
                 title: character.name,
                 details: {
+                  'imagen': character.imageURL,
                   'Especie': character.species,
                   'Género': character.gender,
                   'Casa': character.house,

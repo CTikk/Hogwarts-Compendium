@@ -22,8 +22,10 @@ class MovieCard extends StatelessWidget {
               builder: (_) => DetailPage(
                 title: movie.title,
                 details: {
+                  'imagen': movie.imageURL,
                   'Fecha de estreno': movie.releaseDate,
-                  'Director': movie.director,
+                  'Directors': movie.director,
+                  'Sumario': movie.summary
                 },
               ),
             ),

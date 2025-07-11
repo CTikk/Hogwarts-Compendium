@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:proyecto_3/pages/profile_page.dart';
 import '../provider/user_preferences_provider.dart';
 import '../services/potter_api_service.dart';
 import '../models/character_model.dart';
@@ -13,7 +14,7 @@ import '../widgets/movie_card.dart';
 import '../widgets/loading_indicator.dart';
 import '../widgets/error_message.dart';
 import '../widgets/featured_section.dart';
-import '../widgets/search_bar.dart' as custom;
+import 'search_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -49,10 +50,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           title: 'Destacados de ${prefs.house}',
           futureItems: _apiService.getFeaturedCharacters(prefs.house),
         ),
-        custom.SearchBar(
-          hintText: 'Buscar personaje...',
-          onChanged: (val) => setState(() => characterSearch = val),
-        ),
         FutureBuilder<List<Character>>(
           future: _apiService.fetchCharacters(nameFilter: characterSearch, houseFilter: prefs.house),
           builder: (context, snapshot) {
@@ -78,10 +75,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         FeaturedSection(
           title: 'Hechizos destacados',
           futureItems: PotterApiService().getFeaturedSpells(),
-        ),
-        custom.SearchBar(
-          hintText: 'Buscar hechizo por tipo...',
-          onChanged: (val) => setState(() => spellSearch = val),
         ),
         FutureBuilder<List<Spell>>(
           future: _apiService.fetchSpells(typeFilter: spellSearch),
@@ -143,6 +136,26 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const SearchPage()),
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const ProfilePage()),
+              );
+            },
+          ),
+        ],
         bottom: TabBar(
           controller: _tabController,
           tabs: const [

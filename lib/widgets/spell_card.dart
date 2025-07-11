@@ -22,6 +22,7 @@ class SpellCard extends StatelessWidget {
               builder: (_) => DetailPage(
                 title: spell.name,
                 details: {
+                  'imagen': spell.imageURL,
                   'Encantamiento': spell.incantation,
                   'Efecto': spell.effect,
                   'Tipo': spell.type,

@@ -22,6 +22,7 @@ class BookCard extends StatelessWidget {
               builder: (_) => DetailPage(
                 title: book.title,
                 details: {
+                  'imagen': book.imageURL,
                   'Fecha de publicación': book.releaseDate,
                   'Número de páginas': book.pages.toString(),
                 },
