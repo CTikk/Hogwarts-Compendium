@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'provider/user_preferences_provider.dart';
-import 'pages/home_page.dart';
 import 'pages/onboarding_page.dart';
-import 'utils/theme_manager.dart'; // Asegúrate de importar esto
+import 'utils/theme_manager.dart';
+import 'pages/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,8 +28,8 @@ class MyApp extends StatelessWidget {
     return Consumer<UserPreferencesProvider>(
       builder: (context, userPrefs, _) {
         return MaterialApp(
-          title: 'PotterDB App',
-          theme: getThemeByHouse(userPrefs.house), // ✅ Tema según la casa
+          title: 'Hogwarts Compendium',
+          theme: getThemeByHouse(userPrefs.house),
           home: userPrefs.showTutorial
               ? const OnboardingPage()
               : const MyHomePage(title: 'Inicio'),

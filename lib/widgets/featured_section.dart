@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/character_model.dart';
 import '../models/spell_model.dart';
-import '../services/potter_api_service.dart';
 import '../widgets/character_card.dart';
 import '../widgets/spell_card.dart';
 
