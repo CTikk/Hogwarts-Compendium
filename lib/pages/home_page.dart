@@ -40,10 +40,22 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     elevation: 4,
                     child: InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => const CompendiumPage(title: 'Compendio')),
-                        );
+                        Connectivity().checkConnectivity().then((connectivityResult) {
+                          if (connectivityResult == ConnectivityResult.wifi || connectivityResult == ConnectivityResult.mobile) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const CompendiumPage(title: 'Compendio'),
+                              ),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Sin conexión a internet. No se puede acceder al compendio.'),
+                              ),
+                            );
+                          }
+                        });
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(20),
