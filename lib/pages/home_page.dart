@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_3/pages/profile_page.dart';
 import 'compendium_page.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:http/http.dart' as http;
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -39,23 +40,29 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   child: Card(
                     elevation: 4,
                     child: InkWell(
-                      onTap: () {
-                        Connectivity().checkConnectivity().then((connectivityResult) {
-                          if (connectivityResult == ConnectivityResult.wifi || connectivityResult == ConnectivityResult.mobile) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => const CompendiumPage(title: 'Compendio'),
-                              ),
-                            );
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Sin conexión a internet. No se puede acceder al compendio.'),
-                              ),
-                            );
-                          }
-                        });
+                      onTap: () async {
+                        final connectivityResult = await Connectivity().checkConnectivity();
+
+                        if (connectivityResult != ConnectivityResult.none) {
+                          try {
+                            final response = await http.get(Uri.parse('https://www.google.com'));
+                            if (response.statusCode == 200) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const CompendiumPage(title: 'Compendio'),
+                                ),
+                              );
+                              return;
+                            }
+                          } catch (_) {}
+                        }
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Sin conexión a internet. No se puede acceder al compendio.'),
+                          ),
+                        );
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(20),
