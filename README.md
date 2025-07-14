@@ -28,5 +28,4 @@
 
 # Anexos
 - [Wireframe del proyecto](https://drive.google.com/file/d/1FbzjnW2xx8KoXnVahpZ2RUmN0pvkAgFP/view?usp=sharing)
-- Material visual del proyecto:
-- Video-presentación del proyecto:
+- Video-presentación del proyecto: https://youtu.be/s_xzYMJaJaA
