@@ -29,3 +29,4 @@
 # Anexos
 - [Wireframe del proyecto](https://drive.google.com/file/d/1FbzjnW2xx8KoXnVahpZ2RUmN0pvkAgFP/view?usp=sharing)
 - Video-presentación del proyecto: https://youtu.be/s_xzYMJaJaA
+- [APK] (app-debug.apk)
