@@ -16,7 +16,7 @@ class OfflineBanner extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       color: Colors.orange[700],
       child: const Text(
-        '⚠ Estás en modo sin conexión. Mostrando datos guardados.',
+        '⚠ You are currenlty offline. Showing saved data.',
         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         textAlign: TextAlign.center,
       ),

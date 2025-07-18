@@ -187,7 +187,7 @@ class ProfilePage extends StatelessWidget {
               const SizedBox(height: 20),
               ListTile(
                 leading: const Icon(Icons.info_outline),
-                title: const Text('Acerca de Hogwarts Compendium'),
+                title: const Text('About Hogwarts Compendium'),
                 onTap: () {
                   Navigator.push(
                     context,

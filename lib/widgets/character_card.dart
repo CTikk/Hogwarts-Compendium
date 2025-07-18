@@ -34,9 +34,9 @@ class CharacterCard extends StatelessWidget {
                 title: character.name,
                 details: {
                   'imagen': character.imageURL,
-                  'Especie': character.species,
-                  'Género': character.gender,
-                  'Casa': character.house,
+                  'Species': character.species,
+                  'Gender': character.gender,
+                  'House': character.house,
                   'Patronus': character.patronus
                 },
               ),

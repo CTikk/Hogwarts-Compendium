@@ -30,9 +30,9 @@ class SpellCard extends StatelessWidget {
                 title: spell.name,
                 details: {
                   'imagen': spell.imageURL,
-                  'Encantamiento': spell.incantation,
-                  'Efecto': spell.effect,
-                  'Tipo': spell.type,
+                  'Enchantment': spell.incantation,
+                  'Effect': spell.effect,
+                  'Type': spell.type,
                 },
               ),
             ),

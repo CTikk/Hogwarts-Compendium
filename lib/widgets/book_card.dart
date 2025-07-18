@@ -30,9 +30,9 @@ class BookCard extends StatelessWidget {
                 title: book.title,
                 details: {
                   'imagen': book.imageURL,
-                  'Fecha de publicación': book.releaseDate,
-                  'Número de páginas': book.pages.toString(),
-                  'Sumario': book.summary
+                  'Publish Date': book.releaseDate,
+                  'Number of Pages': book.pages.toString(),
+                  'Summary': book.summary
                 },
               ),
             ),
