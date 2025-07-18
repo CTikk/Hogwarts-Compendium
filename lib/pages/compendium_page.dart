@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:proyecto_3/pages/profile_page.dart';
+import '../pages/profile_page.dart';
 import '../provider/user_preferences_provider.dart';
 import '../services/potter_api_service.dart';
 import '../models/character_model.dart';
@@ -14,6 +14,7 @@ import '../widgets/movie_card.dart';
 import '../widgets/loading_indicator.dart';
 import '../widgets/error_message.dart';
 import '../widgets/featured_section.dart';
+import '../widgets/offline_banner.dart';
 import 'search_page.dart';
 
 class CompendiumPage extends StatefulWidget {
@@ -47,7 +48,7 @@ class _CompendiumPageState extends State<CompendiumPage> with TickerProviderStat
     return ListView(
       children: [
         FeaturedSection(
-          title: 'Destacados de ${prefs.house}',
+          title: 'Featured from ${prefs.house}',
           futureItems: _apiService.getFeaturedCharacters(prefs.house),
         ),
         FutureBuilder<List<Character>>(
@@ -73,7 +74,7 @@ class _CompendiumPageState extends State<CompendiumPage> with TickerProviderStat
     return ListView(
       children: [
         FeaturedSection(
-          title: 'Hechizos destacados',
+          title: 'Featured Spells',
           futureItems: PotterApiService().getFeaturedSpells(),
         ),
         FutureBuilder<List<Spell>>(
@@ -104,7 +105,7 @@ class _CompendiumPageState extends State<CompendiumPage> with TickerProviderStat
         } else if (snapshot.hasError) {
           return ErrorMessage(error: snapshot.error.toString());
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('No hay libros disponibles'));
+          return const Center(child: Text('No books available'));
         }
         return ListView(
           children: snapshot.data!.map((b) => BookCard(book: b)).toList(),
@@ -122,7 +123,7 @@ class _CompendiumPageState extends State<CompendiumPage> with TickerProviderStat
         } else if (snapshot.hasError) {
           return ErrorMessage(error: snapshot.error.toString());
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('No hay películas disponibles'));
+          return const Center(child: Text('No movies available'));
         }
         return ListView(
           children: snapshot.data!.map((m) => MovieCard(movie: m)).toList(),
@@ -134,8 +135,9 @@ class _CompendiumPageState extends State<CompendiumPage> with TickerProviderStat
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColorDark,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(widget.title),
         actions: [
           IconButton(
@@ -158,28 +160,35 @@ class _CompendiumPageState extends State<CompendiumPage> with TickerProviderStat
           ),
         ],
         bottom: TabBar(
-          labelColor: Theme.of(context).primaryColorLight,
-          indicatorColor: Theme.of(context).primaryColorDark,
-          dividerColor: Theme.of(context).shadowColor,
-          unselectedLabelColor: Theme.of(context).shadowColor,
+          labelColor: Theme.of(context).colorScheme.onPrimary,
+          unselectedLabelColor: Theme.of(context).colorScheme.secondary,
+          indicatorColor: Theme.of(context).colorScheme.secondary,
+          dividerColor: Theme.of(context).dividerColor,
           controller: _tabController,
           tabs: const [
-            Tab(text: 'Personajes'),
-            Tab(text: 'Hechizos'),
-            Tab(text: 'Libros'),
-            Tab(text: 'Películas'),
+            Tab(text: 'Characters'),
+            Tab(text: 'Spells'),
+            Tab(text: 'Books'),
+            Tab(text: 'Movies'),
           ],
         ),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          _buildCharacterTab(),
-          _buildSpellTab(),
-          _buildBookTab(),
-          _buildMovieTab(),
-        ],
-      ),
+      body: Column(
+      children: [
+        const OfflineBanner(),
+        Expanded(
+          child: TabBarView(
+            controller: _tabController,
+            children: [
+              _buildCharacterTab(),
+              _buildSpellTab(),
+              _buildBookTab(),
+              _buildMovieTab(),
+            ],
+          ),
+        ),
+      ],
+    ),
     );
   }
 }

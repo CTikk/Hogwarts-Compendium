@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../widgets/offline_banner.dart';
+import 'package:share_plus/share_plus.dart';
+
 
 class DetailPage extends StatelessWidget {
   final String title;
@@ -9,9 +12,24 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(title: Text(title),
+      actions: [
+      IconButton(
+        icon: const Icon(Icons.share),
+        onPressed: () {
+          final shareText = details.entries
+              .where((e) => e.key != 'imagen')
+              .map((e) => '${e.key}: ${e.value}')
+              .join('\n');
+
+          Share.share('📚 $title\n$shareText\n\nsent from Hogwarts Compendium');
+        },
+      ),
+    ],
+    ),
       body: ListView(
         children: [
+          const OfflineBanner(),
           Container(
             height: 250, // espacio limitado para la imagen
             width: double.infinity,

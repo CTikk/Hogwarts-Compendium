@@ -21,11 +21,11 @@ class Character {
     final attr = json['attributes'];
     return Character(
       id: json['id'],
-      name: attr['name'] ?? 'Unknown',
-      species: attr['species'] ?? '',
-      gender: attr['gender'] ?? '',
-      house: attr['house'] ?? '',
-      patronus: attr['patronus'] ?? '',
+      name: attr['name'] ?? 'No disponible',
+      species: attr['species'] ?? 'No disponible',
+      gender: attr['gender'] ?? 'No disponible',
+      house: attr['house'] ?? 'No disponible',
+      patronus: attr['patronus'] ?? 'No disponible',
       imageURL: attr['image'] ?? '',
     );
   }

@@ -15,8 +15,8 @@ class House {
     final attr = json['attributes'];
     return House(
       id: json['id'],
-      name: attr['name'] ?? '',
-      founder: attr['founder'] ?? '',
+      name: attr['name'] ?? 'No disponible',
+      founder: attr['founder'] ?? 'No disponible',
       traits: List<String>.from(attr['traits'] ?? []),
     );
   }

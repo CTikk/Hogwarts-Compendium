@@ -19,11 +19,11 @@ class Movie {
     final attr = json['attributes'];
     return Movie(
       id: json['id'],
-      title: attr['title'] ?? '',
-      releaseDate: attr['release_date'] ?? '',
-      director: (attr['directors'] as List<dynamic>?)?.join(', ') ?? '',
+      title: attr['title'] ?? 'No disponible',
+      releaseDate: attr['release_date'] ?? 'No disponible',
+      director: (attr['directors'] as List<dynamic>?)?.join(', ') ?? 'No disponible',
       imageURL: attr['poster'] ?? '',
-      summary: attr['summary'] ?? ''
+      summary: attr['summary'] ?? 'No disponible'
     );
   }
 }

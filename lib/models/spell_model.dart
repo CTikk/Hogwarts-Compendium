@@ -19,10 +19,10 @@ class Spell {
     final attr = json['attributes'];
     return Spell(
       id: json['id'],
-      name: attr['name'] ?? '',
-      incantation: attr['incantation'] ?? '',
-      effect: attr['effect'] ?? '',
-      type: attr['type'] ?? '',
+      name: attr['name'] ?? 'No disponible',
+      incantation: attr['incantation'] ?? 'No disponible',
+      effect: attr['effect'] ?? 'No disponible',
+      type: attr['type'] ?? 'No disponible',
       imageURL: attr['image'] ?? '',
     );
   }

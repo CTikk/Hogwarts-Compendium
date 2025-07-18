@@ -12,6 +12,7 @@ import '../widgets/book_card.dart';
 import '../widgets/movie_card.dart';
 import '../widgets/loading_indicator.dart';
 import '../widgets/search_bar.dart' as custom;
+import '../widgets/offline_banner.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -61,28 +62,28 @@ class _SearchPageState extends State<SearchPage> {
         if (foundCharacters.isNotEmpty) ...[
           const Padding(
             padding: EdgeInsets.all(8.0),
-            child: Text('Personajes', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            child: Text('Characters', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           ),
           ...foundCharacters.map((c) => CharacterCard(character: c)),
         ],
         if (foundSpells.isNotEmpty) ...[
           const Padding(
             padding: EdgeInsets.all(8.0),
-            child: Text('Hechizos', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            child: Text('Spells', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           ),
           ...foundSpells.map((s) => SpellCard(spell: s)),
         ],
         if (foundBooks.isNotEmpty) ...[
           const Padding(
             padding: EdgeInsets.all(8.0),
-            child: Text('Libros', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            child: Text('Books', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           ),
           ...foundBooks.map((b) => BookCard(book: b)),
         ],
         if (foundMovies.isNotEmpty) ...[
           const Padding(
             padding: EdgeInsets.all(8.0),
-            child: Text('Películas', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            child: Text('Movies', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           ),
           ...foundMovies.map((m) => MovieCard(movie: m)),
         ],
@@ -92,7 +93,7 @@ class _SearchPageState extends State<SearchPage> {
             foundMovies.isEmpty)
           const Center(child: Padding(
             padding: EdgeInsets.all(16.0),
-            child: Text('No se encontraron resultados.'),
+            child: Text('No results found.'),
           )),
       ],
     );
@@ -104,16 +105,17 @@ class _SearchPageState extends State<SearchPage> {
       appBar: AppBar(title: const Text('Buscar')),
       body: Column(
         children: [
+          const OfflineBanner(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: custom.SearchBar(
-              hintText: 'Buscar personaje, hechizo, libro o película...',
+              hintText: 'Search character, spell, book or movie...',
               onChanged: _onSearchChanged,
             ),
           ),
           Expanded(
             child: searchQuery.isEmpty
-                ? const Center(child: Text('Usa la barra de búsqueda para comenzar.'))
+                ? const Center(child: Text('Use the searchbar to get started.'))
                 : isSearching
                     ? const LoadingIndicator()
                     : _buildSearchResults(),
