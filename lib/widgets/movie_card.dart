@@ -30,9 +30,9 @@ class MovieCard extends StatelessWidget {
                 title: movie.title,
                 details: {
                   'imagen': movie.imageURL,
-                  'Fecha de estreno': movie.releaseDate,
+                  'Release Date': movie.releaseDate,
                   'Directors': movie.director,
-                  'Sumario': movie.summary
+                  'Summary': movie.summary
                 },
               ),
             ),
